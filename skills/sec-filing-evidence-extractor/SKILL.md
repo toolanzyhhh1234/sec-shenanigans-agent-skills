@@ -49,6 +49,22 @@ Prioritize sections most likely to contain manipulative reporting clues.
 - Capture definition changes in KPIs as separate evidence rows.
 - If wording is ambiguous, add a `low` extraction confidence row and continue.
 
+## Few-Shot Example
+
+The following abbreviated evidence table shows correctly extracted rows from a hypothetical 10-Q. Use this as an anchor for format, granularity, and tone.
+
+| evidence_id | filing | period | location | topic | fact | numbers | trend | initial_tags | confidence |
+|---|---|---|---|---|---|---|---|---|---|
+| EV-001 | 10-Q 2025-11-03 | Q3 FY2025 | Note 3 – Revenue Recognition | revenue | Company changed from point-in-time to over-time recognition for professional services contracts starting Q3 | n/a | one-off | EM1 | high |
+| EV-002 | 10-Q 2025-11-03 | Q3 FY2025 | Balance Sheet, Note 5 | receivables | Gross AR rose 34% YoY while revenue grew 12%; allowance for doubtful accounts held flat at $4.2M (1.8% of AR vs 2.6% prior year) | AR $233M vs $174M; allowance $4.2M vs $4.5M | increase | EM1, EM5 | high |
+| EV-003 | 10-Q 2025-11-03 | Q3 FY2025 | Cash Flow Statement | CFFO | CFO declined to $18M from $47M YoY; $22M increase in AR was the largest working-capital drag | CFO $18M vs $47M; AR drag -$22M | decrease | CF3 | medium |
+
+Key points illustrated:
+- Each row captures one disclosure fact, not a conclusion.
+- Numbers are exact with units and comparative context.
+- Tags are candidates only; classification happens downstream.
+- The revenue-recognition policy change (EV-001) and the AR buildup (EV-002) are separate rows despite being related, preserving granularity.
+
 ## Output Handoff
 
 Return:
