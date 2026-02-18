@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEC Evidence Extractor"
+  short_description: "Extract structured forensic evidence from 10-K/10-Q/8-K filings."
+  default_prompt: "Extract a traceable evidence table from the provided SEC filings with filing anchors, numeric facts, and candidate Shenanigans tags."

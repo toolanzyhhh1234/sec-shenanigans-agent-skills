@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEC Shenanigans Orchestrator"
+  short_description: "Run the full SEC Shenanigans analysis pipeline."
+  default_prompt: "Run the full pipeline: extract filing evidence, classify Shenanigans categories, run ratio diagnostics, and produce the final risk memo with open questions."

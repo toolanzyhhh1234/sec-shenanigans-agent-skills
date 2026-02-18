@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEC Red-Flag Ratio Checks"
+  short_description: "Run forensic trend diagnostics on SEC filing data."
+  default_prompt: "Compute forensic ratios from filing data, flag anomalies, and map each anomaly to potential Shenanigans categories."

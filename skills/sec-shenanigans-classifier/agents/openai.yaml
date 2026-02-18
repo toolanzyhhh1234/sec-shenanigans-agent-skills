@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEC Shenanigans Classifier"
+  short_description: "Map filing evidence to EM/CF/KM/AA Shenanigans categories."
+  default_prompt: "Classify each evidence row into Shenanigans categories with confidence, counter-evidence, and next checks."

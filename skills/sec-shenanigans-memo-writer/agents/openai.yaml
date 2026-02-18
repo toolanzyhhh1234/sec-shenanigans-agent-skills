@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEC Shenanigans Memo Writer"
+  short_description: "Write investor-grade SEC forensic risk memos."
+  default_prompt: "Draft a concise Shenanigans risk memo using evidence IDs, quantified diagnostics, confidence levels, and diligence questions."
