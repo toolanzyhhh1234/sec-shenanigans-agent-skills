@@ -4,39 +4,29 @@ description: Run forensic ratio and trend checks from SEC filing data to validat
 ---
 # SEC Red-Flag Ratio Checks
 
-Use quick numeric diagnostics to support or refute classification claims.
+Produce quantitative corroboration for risk hypotheses.
+
+## Inputs
+
+- Required: `evidence-table.md`, `risk-register.md`
+- Optional helper: statements fetched via `fetch_financial_sheets.py`
 
 ## Workflow
 
-1. Build a period-aligned dataset from filing evidence.
-1. Compute core diagnostic ratios and deltas.
-1. Compare directionality against management narrative.
-1. Map anomalies to candidate Shenanigans categories.
-1. Output findings with thresholds and caveats.
+1. Validate input artifact schemas.
+1. Build period-aligned metric dataset.
+1. Compute core forensic ratios and deltas.
+1. Link each anomaly to `risk_id` and category.
+1. Write artifact `ratio-diagnostics.md`.
 
-## Minimum Input Fields
+## Required Output Artifact
 
-- Revenue, gross profit, operating income, net income
-- CFO/CFFO, CapEx, free cash flow proxy
-- Accounts receivable, allowances, inventory, payables
-- Capitalized costs, amortization/depreciation, impairments
-- Acquisition-related adjustments and non-GAAP addbacks
-
-## Output Format
-
-- `metric`
-- `formula`
-- `period_values`
-- `anomaly_flag` (`yes|no`)
-- `linked_categories` (for example `EM1`, `EM4`, `CF3`)
-- `interpretation`
-- `confidence`
+Write `ratio-diagnostics.md` with required columns defined in `../sec-shenanigans-orchestrator/references/bundle-contract.md`.
 
 ## Rules
 
-- Emphasize trend breaks and divergence over single-point thresholds.
-- Require at least 4 quarters for directional claims when possible.
-- Report data quality issues explicitly.
-- Avoid precision theater; round and focus on signal.
+- Favor trend breaks over one-period thresholds.
+- Require at least 4 quarters for directional claims when data exists.
+- Emit data-quality limitations explicitly.
 
 Read metric definitions in `references/forensic-metric-library.md`.

@@ -4,43 +4,29 @@ description: Classify SEC filing evidence using Financial Shenanigans taxonomy (
 ---
 # SEC Shenanigans Classifier
 
-Classify only after evidence extraction. Produce falsifiable, evidence-linked calls.
+Convert evidence into falsifiable risk hypotheses.
+
+## Inputs
+
+- Required: `evidence-table.md`
+- Schema: `references/bundle-contract.md` in orchestrator skill
 
 ## Workflow
 
-1. Load evidence rows and preserve `evidence_id` lineage.
-1. Map each row to candidate categories from taxonomy.
-1. Require corroboration before high-confidence calls.
-1. Distinguish aggressive-but-allowed accounting from probable manipulation.
-1. Produce a risk register with confidence and rebuttal conditions.
+1. Validate `evidence-table.md` required columns.
+1. Map evidence rows to candidate categories (`EM`, `CF`, `KM`, `AA`).
+1. Build claims with supporting and counter evidence ids.
+1. Apply confidence gates (`high|medium|low`).
+1. Write artifact `risk-register.md`.
 
-## Corroboration Standard
+## Required Output Artifact
 
-Use these confidence gates.
+Write `risk-register.md` with required columns defined in `../sec-shenanigans-orchestrator/references/bundle-contract.md`.
 
-- `high`: at least 2 independent indicators, one numeric trend and one disclosure/definition signal.
-- `medium`: one strong indicator with incomplete corroboration.
-- `low`: weak or ambiguous signal; keep as watchlist.
+## Rules
 
-Do not mark `high` if the signal can be explained by disclosed business model changes without contradiction.
-
-## Classification Output Schema
-
-- `risk_id`
-- `category`: one of `EM1..EM7`, `CF1..CF3`, `KM1..KM2`, `AA1..AA3`
-- `claim`: precise manipulation hypothesis
-- `supporting_evidence_ids`: list
-- `counter_evidence_ids`: list or empty
-- `confidence`: `high|medium|low`
-- `potential_impact`: earnings/cash flow/valuation/multiple
-- `next_checks`: concrete follow-up tests
-
-## Judgment Rules
-
-- Prefer specific category call over generic “aggressive accounting.”
-- Allow multi-tagging when one action affects earnings and cash flow.
-- Treat KPI definition changes as potential `KM1` until reconciled.
-- Treat post-acquisition accounting policy shifts as potential `AA1`/`AA3` by default.
-- Escalate to watchlist instead of forcing conviction.
+- Do not produce `high` confidence without at least one numeric and one disclosure signal.
+- Keep claims testable and linked to `evidence_id`.
+- If evidence is weak, keep call in watchlist (`low`).
 
 Read taxonomy details in `references/shenanigans-taxonomy.md`.

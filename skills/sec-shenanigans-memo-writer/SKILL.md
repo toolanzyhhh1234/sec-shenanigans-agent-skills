@@ -4,31 +4,28 @@ description: Convert SEC evidence, taxonomy classifications, and ratio diagnosti
 ---
 # SEC Shenanigans Memo Writer
 
-Write decision-ready memos that separate evidence, interpretation, and uncertainty.
+Generate final decision-ready outputs from bundle artifacts.
+
+## Inputs
+
+- Required: `evidence-table.md`, `risk-register.md`, `ratio-diagnostics.md`
 
 ## Workflow
 
-1. Start from evidence table, classification register, and metric checks.
-1. Rank risks by potential decision impact.
-1. Write concise claims with explicit supporting evidence ids.
-1. Include counterarguments and what would invalidate each claim.
-1. End with targeted diligence questions and monitor list.
+1. Validate input schemas and link integrity (`evidence_id`, `risk_id`).
+1. Rank risks by impact and confidence.
+1. Draft memo using required sections.
+1. Draft diligence tracker as open questions.
+1. Write artifacts `shenanigans-memo.md` and `open-questions.md`.
 
-## Memo Structure
+## Required Output Artifacts
 
-1. Executive risk summary (3-7 bullets)
-1. Top Shenanigans hypotheses by category
-1. Evidence highlights with filing anchors
-1. Quantitative diagnostics that support or weaken each hypothesis
-1. Confidence and uncertainty register
-1. Next-step diligence requests
+Write both files using required sections/columns in `../sec-shenanigans-orchestrator/references/bundle-contract.md`.
 
-## Writing Rules
+## Rules
 
-- Use neutral forensic tone.
-- Avoid legal conclusions; present analytical hypotheses.
-- Quote short filing language only when wording is pivotal.
-- Clearly mark missing data and unresolved contradictions.
-- Provide a watchlist even when no high-confidence findings exist.
+- Separate evidence, interpretation, and uncertainty.
+- Use neutral forensic language.
+- Include watchlist items when confidence is low.
 
-Use the template in `references/memo-template.md`.
+Use `references/memo-template.md` for narrative structure.

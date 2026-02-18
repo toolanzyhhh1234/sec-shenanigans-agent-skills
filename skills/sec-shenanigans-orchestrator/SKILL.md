@@ -4,37 +4,44 @@ description: Orchestrate end-to-end SEC forensic analysis by chaining evidence e
 ---
 # SEC Shenanigans Orchestrator
 
-Coordinate the full analysis pipeline across the four component skills.
+Coordinate a strict 5-artifact pipeline.
+
+## Pre-Stage Data Fetch
+
+If filing tables are not readily available, run:
+
+```bash
+python skills/sec-shenanigans-orchestrator/scripts/fetch_financial_sheets.py <TICKER>
+```
+
+Use output as numeric support material; keep forensic evidence anchored to filing sections.
 
 ## Pipeline Order
 
-1. Run `sec-filing-evidence-extractor` to build evidence table.
-1. Run `sec-shenanigans-classifier` on extracted evidence.
-1. Run `sec-red-flag-ratio-checks` for quantitative corroboration.
-1. Run `sec-shenanigans-memo-writer` to produce final memo.
+1. `sec-filing-evidence-extractor` -> `evidence-table.md`
+1. `sec-shenanigans-classifier` -> `risk-register.md`
+1. `sec-red-flag-ratio-checks` -> `ratio-diagnostics.md`
+1. `sec-shenanigans-memo-writer` -> `shenanigans-memo.md`, `open-questions.md`
 
-## Inputs
+## Contract
 
-- Filing set (10-K/10-Q/8-K and optional earnings release exhibits)
-- Analysis window (recommended: latest 8 quarters + latest annual)
-- Optional focus areas (`revenue`, `cash flow`, `acquisition`, `non-GAAP`)
-- Output depth (`quick`, `standard`, `deep`)
+Use exact filenames and required fields in `references/bundle-contract.md`.
 
-## Execution Contract
+## Stop Conditions
 
-Use these handoff artifacts between stages.
+- Missing artifact file required by next stage.
+- Artifact exists but required fields are missing.
+- Cross-file link errors (`risk-register` references unknown `evidence_id`, etc.).
 
-- Stage 1 output: evidence table keyed by `evidence_id`
-- Stage 2 output: risk register keyed by `risk_id` and linked `evidence_id`
-- Stage 3 output: metric anomalies with linked categories and periods
-- Stage 4 output: final memo with confidence and diligence questions
+## Golden Path
 
-## Decision Rules
+Use this self-contained example set as formatting anchor:
 
-- If extraction confidence is mostly low, stop and request better filing inputs.
-- If classification has only low-confidence risks, still produce watchlist memo.
-- If metrics contradict high-confidence classifications, downgrade confidence and explain.
-- If acquisition activity is material, prioritize `AA*` and `KM*` checks.
+- `references/golden-path/evidence-table.md`
+- `references/golden-path/risk-register.md`
+- `references/golden-path/ratio-diagnostics.md`
+- `references/golden-path/shenanigans-memo.md`
+- `references/golden-path/open-questions.md`
 
 ## Output Bundle
 
@@ -46,4 +53,4 @@ Return all artifacts in this order:
 1. `shenanigans-memo.md`
 1. `open-questions.md`
 
-For run profiles and stop conditions, read `references/pipeline-profiles.md`.
+For run profiles, read `references/pipeline-profiles.md`.
