@@ -24,6 +24,7 @@ Write both files using required sections/columns in `../sec-shenanigans-orchestr
 
 ## Rules
 
+- Clean Output Handling: If the inputted `risk-register.md` is empty, write a memo explicitly stating that no material forensic red flags were identified based on the provided evidence. Do not invent artificial concerns to fill space.
 - Separate evidence, interpretation, and uncertainty.
 - Use neutral forensic language.
 - Include watchlist items when confidence is low.

@@ -25,6 +25,7 @@ Write `risk-register.md` with required columns defined in `../sec-shenanigans-or
 
 ## Rules
 
+- Zero-Hallucination Policy: If the extracted evidence does not genuinely match any Shenanigans risk patterns, it is perfectly acceptable to output an empty `risk-register.md`. Never stretch the truth, invent concerns, or force a risk classification just because this is a forensic task. "No Shenanigans Found" is a valid and expected outcome for clean companies.
 - Do not produce `high` confidence without at least one numeric and one disclosure signal.
 - Keep claims testable and linked to `evidence_id`.
 - If evidence is weak, keep call in watchlist (`low`).

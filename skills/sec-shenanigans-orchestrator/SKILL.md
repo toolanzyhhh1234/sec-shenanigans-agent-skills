@@ -8,7 +8,9 @@ Coordinate a strict 5-artifact pipeline.
 
 ## Pre-Stage Data Fetch
 
-If filing tables are not readily available, run:
+Before running any fetch scripts, the Orchestrator must instruct agents to check the local filesystem for `/<ticker>` directories containing user-provided filings (`10-K`, `10-Q`, `.xlsx`). Only rely on external SEC crawls or fetch scripts if the local data is incomplete or missing.
+
+If filing tables are not readily available locally, run:
 
 ```bash
 python skills/sec-shenanigans-orchestrator/scripts/fetch_financial_sheets.py <TICKER>

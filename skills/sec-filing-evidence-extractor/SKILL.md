@@ -27,7 +27,10 @@ Write `evidence-table.md` with required columns defined in `../sec-shenanigans-o
 
 ## Pre-Stage Input Helper
 
-If raw statement tables are missing, orchestrator may run:
+1. **Local Priority:** Always begin by scanning the workspace for a directory matching the `/<ticker>` (e.g., `/PTC`, `/TSLA`). The user will often supply local `10-K`, `10-Q`, or `.xlsx` files in these nested directories. Treat these local files as your primary source of truth.
+2. **External Fallback:** If local information is insufficient or missing, you are expected to proactively crawl the SEC website (EDGAR) or use provided fetching scripts to locate the necessary filings.
+
+If raw statement tables are missing locally, orchestrator may run:
 
 ```bash
 python skills/sec-shenanigans-orchestrator/scripts/fetch_financial_sheets.py <TICKER>
